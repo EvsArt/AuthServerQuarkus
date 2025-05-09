@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "xyz.hellops.authserver.proto";
+option java_outer_classname = "AuthProto";
+
+service Auth {
+  rpc Login (LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+  fixed32 ipv4 = 1;
+  string login = 2;
+  string passwordHash = 3;
+}
+
+message LoginResponse {
+  ResponseStatus status = 1;
+}
+
+enum ResponseStatus {
+  OK = 0;
+  BAD_REQUEST = 1;
+  FORBIDDEN = 2;
+  WRONG_CREDENTIALS = 3;
+  SERVER_ERROR = 4;
+}
